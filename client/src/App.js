@@ -3,7 +3,7 @@ import "./App.css";
 import axios from "axios";
 import Navbar from "./components/Navbar/Navbar";
 import Title from "./components/Title/Title";
-import BookDisplay from "./components/BookDisplay/BookDisplay";
+import BookDisplay from "./components/SavedDisplay/SavedDisplay";
 
 function App() {
   useEffect(() => {
@@ -21,7 +21,7 @@ function App() {
     <div className="App">
         <Navbar />
         <Title />
-        <BookDisplay /> 
+        
     </div>
   );
 }
