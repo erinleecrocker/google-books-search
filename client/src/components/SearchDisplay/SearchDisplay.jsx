@@ -8,6 +8,8 @@ const SearchDisplay = () => {
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState([]);
 
+  
+
   const handleInputChange = (event) => {
     event.preventDefault();
     let { value } = event.target;
@@ -23,7 +25,7 @@ const SearchDisplay = () => {
     }
     API.getBook(query)
       .then((result) => {
-        // console.log(result.data);
+      
         setBooks(result.data.items);
         console.log(result.data.items);
         setQuery("");
@@ -36,7 +38,11 @@ const SearchDisplay = () => {
   return (
     <div>
         <div className="row search-row">
-            <SearchBar/>
+            <SearchBar
+            onSubmit={handleOnSubmit}
+            value={query}
+            onChange={handleInputChange}
+            />
         </div>
       
         <div className="container" id="book-container">
