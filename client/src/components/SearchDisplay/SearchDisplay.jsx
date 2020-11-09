@@ -1,39 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SearchDisplay.css";
+import API from "../../utils/API";
+import SearchCard from "../SearchCard/SearchCard";
+import SearchBar from "../SearchBar/SearchBar";
 
 const SearchDisplay = () => {
+  const [query, setQuery] = useState("");
+  const [books, setBooks] = useState([]);
+
+  const handleInputChange = (event) => {
+    event.preventDefault();
+    let { value } = event.target;
+
+    setQuery(value);
+  };
+
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    if (query === "") {
+      console.log("You must enter a book title to search");
+      return;
+    }
+    API.getBook(query)
+      .then((result) => {
+        // console.log(result.data);
+        setBooks(result.data.items);
+        console.log(result.data.items);
+        setQuery("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <div className="container" id="book-container">
-        <div className="row">
+    <div>
+        <div className="row search-row">
+            <SearchBar/>
+        </div>
+      
+        <div className="container" id="book-container">
+      <div className="row">
         <h6 className="text-left">Search Books</h6>
-        </div>
-      <div className="card">
-        <div className="card-header">
-            <div className="row">
-                <div className="col-sm">
-                    <h5 className="card-title text-left">Book Title</h5>
-                    <p className="text-left">Written by Example Author</p>
-                </div>
-                <div className="col-sm d-flex justify-content-end">
-                    <button type="button" className="btn btn-info button-style">View</button>
-                    <button type="button" className="btn btn-success button-style">Save</button>
-                </div>
-                </div>
-           
-        </div>
-        <div className="card-body row">
-            <div className="col-sm-2">
-                <img src="https://via.placeholder.com/150" alt="image"/>
-            </div>
-            <div className="col-sm-10">
-                <p className="card-text text-left">
-                    With supporting text below as a natural lead-in to additional
-                    content.
-                </p>
-            </div>
-        </div>
       </div>
+      {books === undefined || books.length === 0
+        ? "There are no books by that title in our collection."
+        : books.map((book) => {
+            return (
+              <SearchCard
+                key={book.id}
+                title={book.volumeInfo.title}
+                authors={book.volumeInfo.authors}
+                image={book.volumeInfo.imageLinks.thumbnail}
+                description={book.volumeInfo.description}
+                link={book.volumeInfo.infoLink}
+              />
+            );
+          })}
     </div>
+    </div>  
+    
   );
 };
 
