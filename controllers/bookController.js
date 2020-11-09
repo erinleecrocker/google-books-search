@@ -1,20 +1,7 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const router = express.Router();
 const db = require("../models");
 
-router.get("/api/books", (req, res) => {
-  db.Book.find({}).then((foundBooks) => {
-    res.json(foundBooks);
-  }).catch((err) => {
-    console.log(err);
-    res.status(500).json({
-      error: true,
-      data: null,
-      message: "Failed to retrieve all books.",
-    });
-  });
-});
 
 router.post("/api/books", (req, res) => {
   const newBook = {
@@ -32,6 +19,19 @@ router.post("/api/books", (req, res) => {
 router.delete("/api/books/:id", (req, res) => {
   db.Book.findByIdAndDelete(req.params.id).then((result) => {
     res.json(result);
+  });
+});
+
+router.get("/api/books", (req, res) => {
+  db.Book.find({}).then((foundBooks) => {
+    res.json(foundBooks);
+  }).catch((err) => {
+    console.log(err);
+    res.status(500).json({
+      error: true,
+      data: null,
+      message: "Failed to retrieve all books.",
+    });
   });
 });
 
