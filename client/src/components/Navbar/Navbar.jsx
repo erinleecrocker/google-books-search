@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Navbar = (props) => {
+const Navbar = () => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand">
+        <a className="navbar-brand" href="/search">
           Google Books
         </a>
         <button
@@ -21,20 +22,14 @@ const Navbar = (props) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a  
-              onClick={() => props.handlePageChange("Search")}
-              className={props.currentPage === "Search" ? "nav-link active" : "nav-link"
-              }>
-                Search
-              </a>
+            <Link className="nav-link" to="/">
+              Search
+            </Link>
             </li>
             <li className="nav-item">
-              <a
-                onClick={() => props.handlePageChange("Saved")}
-                className={props.currentPage === "Saved" ? "nav-link active" : "nav-link" 
-              }>
-                Saved
-              </a>
+            <Link className="nav-link" to="/saved">
+              Saved
+            </Link>
             </li>
           </ul>
         </div>

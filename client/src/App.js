@@ -1,23 +1,24 @@
-import { useEffect } from "react";
 import "./App.css";
-import axios from "axios";
-import SearchContainer from "./components/SearchContainer";
+import Saved from "./pages/Saved";
+import Search from "./pages/Search";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Title from "./components/Title/Title";
+import Footer from "./components/Footer/Footer";
 
 function App() {
-  useEffect(() => {
-    console.log("Make an API call");
-    axios
-      .get("/api/config")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  
   return (
     <div className="App">
-        <SearchContainer /> 
+      <Router>
+        <Navbar/>
+        <Title />
+        <Switch>
+          <Route exact path="/saved" component={Saved} />
+          <Route path="/" component={Search} />
+        </Switch>
+        <Footer/>
+      </Router>
     </div>
   );
 }
