@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
+import Navbar from "./components/Navbar/Navbar";
+import Title from "./components/Title/Title";
 
 function App() {
   useEffect(() => {
@@ -17,7 +18,8 @@ function App() {
   }, []);
   return (
     <div className="App">
-        <h1>Hello world!</h1>
+        <Navbar />
+        <Title />
     </div>
   );
 }
