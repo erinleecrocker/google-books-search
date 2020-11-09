@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import "./App.css";
 import axios from "axios";
-import Navbar from "./components/Navbar/Navbar";
-import Title from "./components/Title/Title";
-import BookDisplay from "./components/SavedDisplay/SavedDisplay";
+import SearchContainer from "./components/SearchContainer";
 
 function App() {
   useEffect(() => {
@@ -19,9 +17,7 @@ function App() {
   }, []);
   return (
     <div className="App">
-        <Navbar />
-        <Title />
-        
+        <SearchContainer /> 
     </div>
   );
 }

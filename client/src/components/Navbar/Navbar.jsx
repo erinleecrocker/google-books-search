@@ -1,6 +1,6 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -21,12 +21,18 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href="#">
-                Search <span className="sr-only">(current)</span>
+              <a  
+              onClick={() => props.handlePageChange("Search")}
+              className={props.currentPage === "Search" ? "nav-link active" : "nav-link"
+              }>
+                Search
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a
+                onClick={() => props.handlePageChange("Saved")}
+                className={props.currentPage === "Saved" ? "nav-link active" : "nav-link" 
+              }>
                 Saved
               </a>
             </li>
